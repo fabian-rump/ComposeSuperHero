@@ -13,6 +13,11 @@ object Versions {
     const val ktx = "1.7.0"
     const val material = "1.4.0"
     const val constraintlayout = "2.1.1"
+    const val composeVersion = "1.0.5"
+    const val composeActivity = "1.4.0"
+    const val composeNavigation = "2.4.0-beta02"
+    const val koin = "3.1.3"
+    const val coroutinesCore = "1.5.0"
 
     /* test */
     const val junit = "4.12"
@@ -28,6 +33,15 @@ object Libs {
     const val ktx = "androidx.core:core-ktx:${Versions.ktx}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
+    const val composeUi = "androidx.compose.ui:ui:${Versions.composeVersion}"
+    const val composeMaterial = "androidx.compose.material:material:${Versions.composeVersion}"
+    const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeVersion}"
+    const val composeRuntimeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.composeVersion}"
+    const val composeActivity = "androidx.activity:activity-compose:${Versions.composeActivity}"
+    const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
+    const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
+    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${Versions.coroutinesCore}"
 }
 
 object TestLibs {

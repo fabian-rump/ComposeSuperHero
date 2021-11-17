@@ -6,4 +6,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Compose Super Hero"
-include(":app")
+include("app", "navigation")
