@@ -3,6 +3,7 @@ package de.fabianrump.composesuperhero.ui.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -82,7 +82,7 @@ private fun LastComicItem(content: String) {
             fontStyle = if (content.isEmpty()) FontStyle.Italic else null
         )
         Icon(
-            tint = Color.Black,
+            tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
             imageVector = Icons.Filled.KeyboardArrowRight,
             contentDescription = "Open Comic",
         )
