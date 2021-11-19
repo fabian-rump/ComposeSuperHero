@@ -33,6 +33,9 @@ android {
 
 dependencies {
     implementation(project(":navigation"))
+    implementation(project(":network"))
+    implementation(project(":database"))
+    implementation(project(":domain"))
     implementation(Libs.ktx)
     implementation(Libs.appcompat)
     implementation(Libs.material)
@@ -45,6 +48,7 @@ dependencies {
     implementation(Libs.composeNavigation)
     implementation(Libs.koinAndroid)
     implementation(Libs.koinCompose)
+    implementation(Libs.timber)
     testImplementation(TestLibs.junit)
     androidTestImplementation(AndroidTestLibs.junit)
     androidTestImplementation(AndroidTestLibs.espresso)

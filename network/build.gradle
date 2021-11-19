@@ -1,0 +1,22 @@
+plugins {
+    id("com.android.library")
+    id("kotlin-android")
+}
+apply from: '../buildscripts/secret.gradle'
+
+android {
+    compileSdkVersion(Apps.compileSdk)
+    defaultConfig {
+        minSdkVersion(Apps.minSdk)
+        targetSdkVersion(Apps.targetSdk)
+
+        buildConfigField("String", "PRIVATE_API_KEY", secretProperties['PRIVATE_API_KEY'])
+        buildConfigField("String", "PUBLIC_API_KEY", secretProperties['PUBLIC_API_KEY'])
+    }
+}
+
+dependencies {
+    implementation(Libs.koinAndroid)
+    implementation(Libs.retrofit)
+    implementation(Libs.retrofitGson)
+}

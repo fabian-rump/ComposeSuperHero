@@ -17,7 +17,9 @@ object Versions {
     const val composeActivity = "1.4.0"
     const val composeNavigation = "2.4.0-beta02"
     const val koin = "3.1.3"
-    const val coroutinesCore = "1.5.0"
+    const val retrofit = "2.6.2"
+    const val room = "2.3.0"
+    const val timber = "4.7.1"
 
     /* test */
     const val junit = "4.12"
@@ -41,7 +43,12 @@ object Libs {
     const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
     const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
-    const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${Versions.coroutinesCore}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler= "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
+    const val timber =  "com.jakewharton.timber:timber:${Versions.timber}"
 }
 
 object TestLibs {
