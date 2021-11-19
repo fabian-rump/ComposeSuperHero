@@ -50,6 +50,8 @@ dependencies {
     implementation(Libs.koinCompose)
     implementation(Libs.timber)
     implementation(Libs.coilCompose)
+    implementation(Libs.palette)
+    implementation(Libs.accompanist)
     testImplementation(TestLibs.junit)
     androidTestImplementation(AndroidTestLibs.junit)
     androidTestImplementation(AndroidTestLibs.espresso)

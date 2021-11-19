@@ -21,6 +21,8 @@ object Versions {
     const val room = "2.3.0"
     const val timber = "4.7.1"
     const val coil = "1.4.0"
+    const val palette = "28.0.0"
+    const val accompanist = "0.17.0"
 
     /* test */
     const val junit = "4.12"
@@ -51,6 +53,9 @@ object Libs {
     const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
     const val timber =  "com.jakewharton.timber:timber:${Versions.timber}"
     const val coilCompose =  "io.coil-kt:coil-compose:${Versions.coil}"
+    const val palette = "com.android.support:palette-v7:${Versions.palette}"
+    const val accompanist = "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
+
 }
 
 object TestLibs {

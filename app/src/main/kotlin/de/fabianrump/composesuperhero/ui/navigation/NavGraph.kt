@@ -1,5 +1,6 @@
 package de.fabianrump.composesuperhero.ui.navigation
 
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -22,7 +23,7 @@ fun NavGraphBuilder.addMainGraph(popBackStack: () -> Unit) {
         composable("${Navigator.NavTarget.Detail.label}/{heroId}", arguments = listOf(navArgument("heroId") { type = NavType.StringType })) {
             val heroId = it.arguments?.getString("heroId") ?: "-1"
             val viewModel: DetailViewModel by viewModel()
-            viewModel.initialize(heroId)
+            viewModel.initialize(heroId, LocalContext.current)
             DetailScreen(viewModel, popBackStack)
         }
     }
