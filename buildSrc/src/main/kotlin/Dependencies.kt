@@ -1,6 +1,6 @@
 object Apps {
     const val compileSdk = 31
-    const val minSdk = 21
+    const val minSdk = 24
     const val targetSdk = 31
     const val versionCode = 1
     const val versionName = "1.0.0"
@@ -20,6 +20,7 @@ object Versions {
     const val retrofit = "2.6.2"
     const val room = "2.3.0"
     const val timber = "4.7.1"
+    const val coil = "1.4.0"
 
     /* test */
     const val junit = "4.12"
@@ -49,6 +50,7 @@ object Libs {
     const val roomCompiler= "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
     const val timber =  "com.jakewharton.timber:timber:${Versions.timber}"
+    const val coilCompose =  "io.coil-kt:coil-compose:${Versions.coil}"
 }
 
 object TestLibs {
