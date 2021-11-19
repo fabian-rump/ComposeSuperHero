@@ -1,11 +1,11 @@
 package de.fabianrump.database.repository
 
-import android.util.Log
 import de.fabianrump.database.dao.MarvelAttributionDao
 import de.fabianrump.database.dao.SuperHeroComicDao
 import de.fabianrump.database.model.MarvelAttribution
 import de.fabianrump.database.model.SuperHeroComic
 import de.fabianrump.network.service.MarvelService
+import timber.log.Timber
 
 class SuperHeroComicRepositoryImpl(
     private val marvelAttributionDao: MarvelAttributionDao,
@@ -41,7 +41,7 @@ class SuperHeroComicRepositoryImpl(
 
                 return Pair(it.data.total, it.data.count)
             }
-        else Log.e("FAIL", response.errorBody()?.string() ?: "nothing")
+        else Timber.d(response.errorBody()?.string())
 
         return Pair(0, 0)
     }

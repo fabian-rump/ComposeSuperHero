@@ -12,7 +12,12 @@ class Navigator {
         _sharedFlow.tryEmit(navTarget)
     }
 
-    enum class NavTarget(val label: String) {
-        Home("home")
+    sealed class NavTarget(val label: String) {
+        object Home : NavTarget("home")
+        data class Detail(val id: String) : NavTarget("detail/$id") {
+            companion object {
+                const val label = "detail"
+            }
+        }
     }
 }

@@ -15,6 +15,6 @@ fun NavigationComponent(navController: NavHostController, navigator: Navigator) 
     }
 
     NavHost(navController = navController, startDestination = "start") {
-        addMainGraph()
+        addMainGraph { navController.popBackStack() }
     }
 }

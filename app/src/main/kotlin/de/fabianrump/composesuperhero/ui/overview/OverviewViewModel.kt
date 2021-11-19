@@ -1,16 +1,18 @@
-package de.fabianrump.composesuperhero.ui
+package de.fabianrump.composesuperhero.ui.overview
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import de.fabianrump.composesuperhero.ui.util.receiveUpdatesOf
 import de.fabianrump.database.model.SuperHero
 import de.fabianrump.domain.SuperHeroInteractor
+import de.fabianrump.navigation.Navigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainViewModel(
+class OverviewViewModel(
+    private val navigator: Navigator,
     private val superHeroInteractor: SuperHeroInteractor
 ) : ViewModel() {
 
@@ -19,12 +21,15 @@ class MainViewModel(
     init {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                superHeroes.receiveUpdatesOf(superHeroInteractor.loadSuperHeroes())
+                val fetchedSuperHeroes = superHeroInteractor.loadSuperHeroes()
+                withContext(Dispatchers.Main) {
+                    superHeroes.receiveUpdatesOf(fetchedSuperHeroes)
+                }
             }
         }
     }
 
-    private fun <T> MediatorLiveData<T>.receiveUpdatesOf(liveData: LiveData<T>) {
-        addSource(liveData) { newValue -> value = newValue }
+    fun navigateToDetail(id: String) {
+        navigator.navigateTo(Navigator.NavTarget.Detail(id))
     }
 }

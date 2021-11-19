@@ -1,7 +1,8 @@
-package de.fabianrump.composesuperhero.ui
+package de.fabianrump.composesuperhero.ui.overview
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -22,17 +24,19 @@ import coil.compose.rememberImagePainter
 import de.fabianrump.database.model.SuperHero
 
 @Composable
-fun HomeScreen(viewModel: MainViewModel) {
+fun OverviewScreen(viewModel: OverviewViewModel) {
     val heroes = viewModel.superHeroes.observeAsState()
 
-    LazyColumn(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        items(items = heroes.value ?: listOf(), itemContent = {
-            Box(contentAlignment = Alignment.BottomCenter) {
-                SuperHeroThumbnail(it)
-                OverlayGradient()
-                SuperHeroName(it)
-            }
-        })
+    Scaffold {
+        LazyColumn(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            items(items = heroes.value ?: listOf(), itemContent = {
+                Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.clickable(onClick = { viewModel.navigateToDetail(it.id) })) {
+                    SuperHeroThumbnail(it)
+                    OverlayGradient()
+                    SuperHeroName(it)
+                }
+            })
+        }
     }
 }
 
