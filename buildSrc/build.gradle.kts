@@ -1,4 +1,4 @@
-import org.gradle.kotlin.dsl.`kotlin-dsl`plugins {
+plugins {
     `kotlin-dsl`
 }
 repositories {

@@ -26,7 +26,7 @@ private fun provideRetrofit(httpClient: OkHttpClient, gsonConverterFactory: Gson
         .addConverterFactory(gsonConverterFactory)
         .build()
 
-private fun provideRetrofitHttpClient(retrofitOkHttpClientBuilder: OkHttpClient.Builder): OkHttpClient =    retrofitOkHttpClientBuilder.build()
+private fun provideRetrofitHttpClient(retrofitOkHttpClientBuilder: OkHttpClient.Builder): OkHttpClient = retrofitOkHttpClientBuilder.build()
 
 private fun provideRetrofitHttpClientBuilder(authenticationInterceptor: MarvelAuthenticationInterceptor) =
     OkHttpClient.Builder()

@@ -23,7 +23,7 @@ abstract class SuperHeroDao {
     abstract fun getAllSuperHeroes(): LiveData<List<SuperHero>>
 
     @Transaction
-    open suspend fun insertSuperHeroesWithComics(vararg superHeroesWithComics: SuperHeroWithComics){
+    open suspend fun insertSuperHeroesWithComics(vararg superHeroesWithComics: SuperHeroWithComics) {
         val superHeroes = superHeroesWithComics.map { it.superHero }.toTypedArray()
         val comics = superHeroesWithComics.map { it.comics }.flatten().toTypedArray()
 
