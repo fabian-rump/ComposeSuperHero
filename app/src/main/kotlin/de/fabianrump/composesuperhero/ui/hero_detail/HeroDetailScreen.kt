@@ -56,7 +56,7 @@ fun HeroDetailScreen(viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
                         .padding(8.dp)
                         .fillMaxWidth()
                         .clickable {
-                            viewModel.navigateToComicDetails(it.id)
+                            viewModel.navigateToComic(it.id)
                         }
                 ) {
                     Column {

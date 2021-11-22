@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.onEach
 @Composable
 fun NavigationComponent(navController: NavHostController, navigator: Navigator) {
     LaunchedEffect("navigation") {
-        navigator.sharedFlow.onEach { navController.navigate(it.label) }.launchIn(this)
+        navigator.sharedFlow.onEach { navController.navigate(it) }.launchIn(this)
     }
 
     NavHost(navController = navController, startDestination = "start") {

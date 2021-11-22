@@ -3,6 +3,7 @@ package de.fabianrump.composesuperhero.ui.overview
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import de.fabianrump.composesuperhero.ui.navigation.navigateToHeroDetails
 import de.fabianrump.composesuperhero.ui.util.receiveUpdatesOf
 import de.fabianrump.database.model.SuperHero
 import de.fabianrump.domain.SuperHeroInteractor
@@ -29,7 +30,5 @@ class OverviewViewModel(
         }
     }
 
-    fun navigateToDetail(id: String) {
-        navigator.navigateTo(Navigator.NavTarget.HeroDetail(id))
-    }
+    fun navigateToHero(id: String) = navigateToHeroDetails(navigator, id)
 }

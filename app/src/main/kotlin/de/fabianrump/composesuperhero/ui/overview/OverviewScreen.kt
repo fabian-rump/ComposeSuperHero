@@ -30,7 +30,7 @@ fun OverviewScreen(viewModel: OverviewViewModel) {
     Scaffold {
         LazyColumn(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             items(items = heroes.value ?: listOf(), itemContent = {
-                Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.clickable(onClick = { viewModel.navigateToDetail(it.id) })) {
+                Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.clickable(onClick = { viewModel.navigateToHero(it.id) })) {
                     SuperHeroThumbnail(it)
                     OverlayGradient()
                     SuperHeroName(it)

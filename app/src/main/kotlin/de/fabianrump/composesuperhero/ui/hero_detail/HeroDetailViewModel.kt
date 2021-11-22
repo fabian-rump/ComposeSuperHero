@@ -1,14 +1,10 @@
 package de.fabianrump.composesuperhero.ui.hero_detail
 
 import android.content.Context
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.palette.graphics.Palette
-import coil.Coil
-import coil.request.ImageRequest
-import coil.request.SuccessResult
+import de.fabianrump.composesuperhero.ui.navigation.navigateToComicDetails
 import de.fabianrump.composesuperhero.ui.util.receiveUpdatesOf
 import de.fabianrump.database.model.SuperHeroWithComics
 import de.fabianrump.domain.ColorCalculator
@@ -36,7 +32,8 @@ class HeroDetailViewModel(
 
                     thumbnailColor.addSource(fetchedSuperHero) {
                         viewModelScope.launch {
-                            val dominantColor = colorCalculator.calculateDominantColor(context, fetchedSuperHero.value?.superHero?.thumbnailLandscape ?: "")
+                            val dominantColor =
+                                colorCalculator.calculateDominantColor(context, fetchedSuperHero.value?.superHero?.thumbnailLandscape ?: "")
                             thumbnailColor.value = dominantColor
                         }
                     }
@@ -45,7 +42,5 @@ class HeroDetailViewModel(
         }
     }
 
-    fun navigateToComicDetails(id: Int) {
-        navigator.navigateTo(Navigator.NavTarget.ComicDetail(id))
-    }
+    fun navigateToComic(id: Int) = navigateToComicDetails(navigator, id)
 }
