@@ -25,13 +25,27 @@ data class ComicDataWrapper(
             @SerializedName("format") val format: String,
             @SerializedName("pageCount") val pageCount: Int,
             @SerializedName("resourceURI") val resourceURI: String,
-            @SerializedName("thumbnail") val thumbnail: Image
+            @SerializedName("thumbnail") val thumbnail: Image,
+            @SerializedName("characters") val characters: CharacterList
         ) {
 
             data class Image(
                 @SerializedName("path") val path: String,
                 @SerializedName("extension") val extension: String
             )
+
+            data class CharacterList(
+                @SerializedName("available") val available: Int,
+                @SerializedName("returned") val returned: Int,
+                @SerializedName("collectionURI") val collectionURI: String,
+                @SerializedName("items") val items: List<CharacterSummary>
+            ) {
+                data class CharacterSummary(
+                    @SerializedName("resourceURI") val resourceURI: String,
+                    @SerializedName("name") val name: String,
+                    @SerializedName("role") val role: String,
+                )
+            }
         }
     }
 }

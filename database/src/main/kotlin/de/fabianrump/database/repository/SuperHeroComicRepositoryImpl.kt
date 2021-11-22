@@ -37,6 +37,7 @@ class SuperHeroComicRepositoryImpl(
                             comic.format,
                             comic.pageCount.toString(),
                             comic.thumbnail.let { thumbnail -> "${thumbnail.path}/landscape_incredible.${thumbnail.extension}" },
+                            comic.characters.items.map { character -> character.name }
                         )
                     }.toTypedArray()
 

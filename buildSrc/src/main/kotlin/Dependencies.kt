@@ -56,7 +56,6 @@ object Libs {
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
     const val palette = "com.android.support:palette-v7:${Versions.palette}"
     const val accompanist = "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
-
 }
 
 object TestLibs {

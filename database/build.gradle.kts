@@ -20,4 +20,5 @@ dependencies {
     implementation(Libs.roomKtx)
     implementation(Libs.retrofit)
     implementation(Libs.timber)
+    implementation(Libs.retrofitGson)
 }
