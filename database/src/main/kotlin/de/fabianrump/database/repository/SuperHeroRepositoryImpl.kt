@@ -91,6 +91,6 @@ class SuperHeroRepositoryImpl(
 
     private fun Character.toSuperHeroComics(): List<SuperHeroComic> =
         comics.items.map {
-            SuperHeroComic(it.name, it.resourceURI, id)
+            SuperHeroComic(name = it.name, resourceUri = it.resourceURI, superHeroId = id)
         }
 }

@@ -14,4 +14,7 @@ android {
 dependencies {
     implementation(project(":database"))
     implementation(Libs.koinAndroid)
+    implementation(Libs.palette)
+    implementation(Libs.coil)
+    implementation(Libs.ktx)
 }

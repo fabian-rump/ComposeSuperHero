@@ -24,7 +24,14 @@ data class ComicDataWrapper(
             @SerializedName("isbn") val isbn: String,
             @SerializedName("format") val format: String,
             @SerializedName("pageCount") val pageCount: Int,
-            @SerializedName("resourceURI") val resourceURI: String
-        )
+            @SerializedName("resourceURI") val resourceURI: String,
+            @SerializedName("thumbnail") val thumbnail: Image
+        ) {
+
+            data class Image(
+                @SerializedName("path") val path: String,
+                @SerializedName("extension") val extension: String
+            )
+        }
     }
 }

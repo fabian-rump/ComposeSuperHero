@@ -15,4 +15,7 @@ abstract class SuperHeroComicDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertComics(vararg superHeroComics: SuperHeroComic)
+
+    @Query("SELECT * from superherocomic WHERE id = :id")
+    abstract fun getSuperHeroComicById(id: Int): LiveData<SuperHeroComic>
 }

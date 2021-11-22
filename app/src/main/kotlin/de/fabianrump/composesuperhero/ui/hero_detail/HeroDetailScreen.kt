@@ -1,4 +1,4 @@
-package de.fabianrump.composesuperhero.ui.detail
+package de.fabianrump.composesuperhero.ui.hero_detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,10 +40,10 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import de.fabianrump.database.model.SuperHeroWithComics
 
 @Composable
-fun DetailScreen(viewModel: DetailViewModel, popBackStack: () -> Unit) {
+fun HeroDetailScreen(viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
     val hero = viewModel.superHero.observeAsState()
     Scaffold(
-        topBar = { DetailTopBar(viewModel, popBackStack) }
+        topBar = { HeroDetailTopBar(viewModel, popBackStack) }
     ) {
         val lazyListState = rememberLazyListState()
         LazyColumn(Modifier.fillMaxSize(), lazyListState) {
@@ -55,6 +55,9 @@ fun DetailScreen(viewModel: DetailViewModel, popBackStack: () -> Unit) {
                     modifier = Modifier
                         .padding(8.dp)
                         .fillMaxWidth()
+                        .clickable {
+                            viewModel.navigateToComicDetails(it.id)
+                        }
                 ) {
                     Column {
                         ComicItem(it.name, isHeader = true)
@@ -70,12 +73,11 @@ fun DetailScreen(viewModel: DetailViewModel, popBackStack: () -> Unit) {
 
 @Composable
 private fun LastComicItem(content: String) {
-    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
-        .padding(4.dp)
-        .fillMaxWidth()
-        .clickable {
-            // TODO
-        }) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth()
+    ) {
         Text(
             text = content.checkUnknown(),
             fontSize = 12.sp,
@@ -140,11 +142,11 @@ private fun DetailThumbnailHeader(
 }
 
 @Composable
-private fun DetailTopBar(viewModel: DetailViewModel, popBackStack: () -> Unit) {
+private fun HeroDetailTopBar(viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
     val hero = viewModel.superHero.observeAsState()
     val color = viewModel.thumbnailColor.observeAsState()
 
-    rememberSystemUiController().setSystemBarsColor(Color(color.value ?: 0x0000FF))
+    rememberSystemUiController().setSystemBarsColor(Color(color.value ?: 0xFFFFFF))
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier

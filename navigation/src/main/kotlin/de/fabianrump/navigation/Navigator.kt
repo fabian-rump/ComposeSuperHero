@@ -14,9 +14,15 @@ class Navigator {
 
     sealed class NavTarget(val label: String) {
         object Home : NavTarget("home")
-        data class Detail(val id: String) : NavTarget("detail/$id") {
+        data class HeroDetail(val id: String) : NavTarget("hero_detail/$id") {
             companion object {
-                const val label = "detail"
+                const val label = "hero_detail"
+            }
+        }
+
+        data class ComicDetail(val id: Int) : NavTarget("comic_detail/$id") {
+            companion object {
+                const val label = "comic_detail"
             }
         }
     }

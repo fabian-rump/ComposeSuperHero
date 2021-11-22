@@ -1,11 +1,9 @@
-package de.fabianrump.database.repository
+package de.fabianrump.domain
 
 import androidx.lifecycle.LiveData
 import de.fabianrump.database.model.SuperHeroComic
 
-interface SuperHeroComicRepository {
-
-    suspend fun loadComicsByCharacterId(id: String)
+interface SuperHeroComicInteractor {
 
     suspend fun loadComicById(id: Int): LiveData<SuperHeroComic>
 }

@@ -30,6 +30,6 @@ class OverviewViewModel(
     }
 
     fun navigateToDetail(id: String) {
-        navigator.navigateTo(Navigator.NavTarget.Detail(id))
+        navigator.navigateTo(Navigator.NavTarget.HeroDetail(id))
     }
 }

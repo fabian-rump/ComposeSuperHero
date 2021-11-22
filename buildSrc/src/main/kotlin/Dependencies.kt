@@ -52,6 +52,7 @@ object Libs {
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
     const val palette = "com.android.support:palette-v7:${Versions.palette}"
     const val accompanist = "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"

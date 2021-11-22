@@ -17,6 +17,8 @@ class SuperHeroComicRepositoryImpl(
         downloadAndStoreSuperHeroComics(id)
     }
 
+    override suspend fun loadComicById(id: Int) = superHeroComicDao.getSuperHeroComicById(id)
+
     private suspend fun downloadAndStoreSuperHeroComics(
         characterId: String
     ): Pair<Int, Int> {
@@ -27,12 +29,14 @@ class SuperHeroComicRepositoryImpl(
                 val superHeroesWithComics =
                     it.data.results.map { comic ->
                         SuperHeroComic(
+                            comic.id,
                             comic.title,
                             comic.resourceURI,
                             characterId,
                             comic.isbn,
                             comic.format,
-                            comic.pageCount.toString()
+                            comic.pageCount.toString(),
+                            comic.thumbnail.let { thumbnail -> "${thumbnail.path}/landscape_incredible.${thumbnail.extension}" },
                         )
                     }.toTypedArray()
 

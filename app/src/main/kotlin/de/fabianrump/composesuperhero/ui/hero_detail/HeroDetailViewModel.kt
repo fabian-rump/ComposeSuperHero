@@ -1,4 +1,4 @@
-package de.fabianrump.composesuperhero.ui.detail
+package de.fabianrump.composesuperhero.ui.hero_detail
 
 import android.content.Context
 import androidx.core.graphics.drawable.toBitmap
@@ -11,13 +11,17 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import de.fabianrump.composesuperhero.ui.util.receiveUpdatesOf
 import de.fabianrump.database.model.SuperHeroWithComics
+import de.fabianrump.domain.ColorCalculator
 import de.fabianrump.domain.SuperHeroInteractor
+import de.fabianrump.navigation.Navigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailViewModel(
-    private val superHeroInteractor: SuperHeroInteractor
+class HeroDetailViewModel(
+    private val navigator: Navigator,
+    private val superHeroInteractor: SuperHeroInteractor,
+    private val colorCalculator: ColorCalculator
 ) : ViewModel() {
 
     val superHero = MediatorLiveData<SuperHeroWithComics>()
@@ -31,21 +35,17 @@ class DetailViewModel(
                     superHero.receiveUpdatesOf(fetchedSuperHero)
 
                     thumbnailColor.addSource(fetchedSuperHero) {
-                        viewModelScope.launch { getTopBarColor(context) }
+                        viewModelScope.launch {
+                            val dominantColor = colorCalculator.calculateDominantColor(context, fetchedSuperHero.value?.superHero?.thumbnailLandscape ?: "")
+                            thumbnailColor.value = dominantColor
+                        }
                     }
                 }
             }
         }
     }
 
-    private suspend fun getTopBarColor(context: Context) {
-        val request = ImageRequest.Builder(context)
-            .data(superHero.value?.superHero?.thumbnailLandscape)
-            .allowHardware(false)
-            .build()
-
-        val drawable = (Coil.imageLoader(context).execute(request) as SuccessResult).drawable
-        val palette = Palette.Builder(drawable.toBitmap()).generate()
-        withContext(Dispatchers.Main) { thumbnailColor.value = palette.dominantSwatch?.rgb }
+    fun navigateToComicDetails(id: Int) {
+        navigator.navigateTo(Navigator.NavTarget.ComicDetail(id))
     }
 }
