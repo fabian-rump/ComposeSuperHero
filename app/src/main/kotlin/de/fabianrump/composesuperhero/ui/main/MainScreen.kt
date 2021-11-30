@@ -16,15 +16,15 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
     Scaffold(bottomBar = {
         BottomNavigation {
             BottomNavigationItem(selected = true, onClick = {
-                viewModel.navigateToHeroes()
+                viewModel.navigateToHeroes(navController)
             }, icon = { Icon(painterResource(id = R.drawable.hero), "") })
 
             BottomNavigationItem(selected = true, onClick = {
-                viewModel.navigateToSeries()
+                viewModel.navigateToSeries(navController)
             }, icon = { Icon(painterResource(id = R.drawable.series), "") })
 
             BottomNavigationItem(selected = true, onClick = {
-                viewModel.navigateToEvents()
+                viewModel.navigateToEvents(navController)
             }, icon = { Icon(painterResource(id = R.drawable.events), "") })
         }
     }) {
