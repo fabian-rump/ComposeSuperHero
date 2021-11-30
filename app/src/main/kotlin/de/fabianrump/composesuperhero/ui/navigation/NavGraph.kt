@@ -9,17 +9,19 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import de.fabianrump.composesuperhero.ui.comic_detail.ComicDetailScreen
 import de.fabianrump.composesuperhero.ui.comic_detail.ComicDetailViewModel
+import de.fabianrump.composesuperhero.ui.events.EventsScreen
 import de.fabianrump.composesuperhero.ui.hero_detail.HeroDetailScreen
 import de.fabianrump.composesuperhero.ui.hero_detail.HeroDetailViewModel
 import de.fabianrump.composesuperhero.ui.overview.OverviewScreen
 import de.fabianrump.composesuperhero.ui.overview.OverviewViewModel
+import de.fabianrump.composesuperhero.ui.series.SeriesScreen
 import de.fabianrump.navigation.Navigator
 import org.koin.androidx.compose.viewModel
 import timber.log.Timber
 
-fun NavGraphBuilder.addMainGraph(popBackStack: () -> Unit) {
-    navigation(Navigator.NavTarget.Home.label, "start") {
-        composable(Navigator.NavTarget.Home.label) {
+fun NavGraphBuilder.addHeroesGraph(popBackStack: () -> Unit) {
+    navigation(Navigator.NavTarget.Heroes.label, "heroesRoute") {
+        composable(Navigator.NavTarget.Heroes.label) {
             val viewModel: OverviewViewModel by viewModel()
             OverviewScreen(viewModel)
         }
@@ -39,5 +41,29 @@ fun NavGraphBuilder.addMainGraph(popBackStack: () -> Unit) {
             viewModel.initialize(comicId, LocalContext.current)
             ComicDetailScreen(viewModel, popBackStack)
         }
+    }
+}
+
+fun NavGraphBuilder.addSeriesGraph() {
+    navigation(Navigator.NavTarget.Series.label, "seriesRoute") {
+        composable(Navigator.NavTarget.Series.label) {
+            SeriesScreen()
+        }
+    }
+}
+
+fun NavGraphBuilder.addEventsGraph() {
+    navigation(Navigator.NavTarget.Events.label, "eventsRoute") {
+        composable(Navigator.NavTarget.Events.label) {
+            EventsScreen()
+        }
+    }
+}
+
+fun NavGraphBuilder.addMainGraph(popBackStack: () -> Unit) {
+    navigation("heroesRoute", "mainRoute") {
+        addHeroesGraph(popBackStack)
+        addSeriesGraph()
+        addEventsGraph()
     }
 }

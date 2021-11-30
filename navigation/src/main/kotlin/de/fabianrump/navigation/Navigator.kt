@@ -17,8 +17,11 @@ class Navigator {
     }
 
     sealed class NavTarget(val label: String) {
-        object Home : NavTarget("home")
+        object Heroes : NavTarget("heroes")
         object HeroDetail : NavTarget("hero_detail")
         object ComicDetail : NavTarget("comic_detail")
+        object Main : NavTarget("main")
+        object Series : NavTarget("series")
+        object Events : NavTarget("events")
     }
 }
