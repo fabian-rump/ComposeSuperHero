@@ -37,13 +37,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import de.fabianrump.composesuperhero.ui.main.MainViewModel
 import de.fabianrump.database.model.SuperHeroWithComics
 
 @Composable
-fun HeroDetailScreen(viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
+fun HeroDetailScreen(sharedViewModel:MainViewModel, viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
     val hero = viewModel.superHero.observeAsState()
+
     Scaffold(
-        topBar = { HeroDetailTopBar(viewModel, popBackStack) }
+        topBar = { HeroDetailTopBar(sharedViewModel, viewModel, popBackStack) }
     ) {
         val lazyListState = rememberLazyListState()
         LazyColumn(Modifier.fillMaxSize(), lazyListState) {
@@ -142,9 +144,9 @@ private fun DetailThumbnailHeader(
 }
 
 @Composable
-private fun HeroDetailTopBar(viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
+private fun HeroDetailTopBar(sharedViewModel: MainViewModel, viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
     val hero = viewModel.superHero.observeAsState()
-    val color = viewModel.thumbnailColor.observeAsState()
+    val color = sharedViewModel.color.observeAsState()
 
     rememberSystemUiController().setSystemBarsColor(Color(color.value ?: 0xFFFFFF))
     Row(

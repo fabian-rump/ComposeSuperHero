@@ -1,5 +1,7 @@
 package de.fabianrump.composesuperhero.ui.main
 
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import de.fabianrump.composesuperhero.ui.navigation.navigateToEvents
@@ -16,6 +18,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     private var currentVisibleScreen: NavTarget = Heroes
+    val color = MediatorLiveData<Int>()
 
     fun navigateToHeroes(navController: NavController) = navigateToHeroes(navigator).also { Heroes.handleBackStack(navController) }
 

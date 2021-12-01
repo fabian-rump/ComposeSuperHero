@@ -38,12 +38,13 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import de.fabianrump.composesuperhero.R
+import de.fabianrump.composesuperhero.ui.main.MainViewModel
 import de.fabianrump.database.model.SuperHeroComic
 
 @Composable
-fun ComicDetailScreen(viewModel: ComicDetailViewModel, popBackStack: () -> Unit) {
+fun ComicDetailScreen(sharedViewModel: MainViewModel, viewModel: ComicDetailViewModel, popBackStack: () -> Unit) {
     val comic = viewModel.comic.observeAsState()
-    val color = viewModel.color.observeAsState()
+    val color = sharedViewModel.color.observeAsState()
 
     rememberSystemUiController().setSystemBarsColor(Color(color.value ?: 0xFFFFFF))
     Scaffold(
@@ -53,7 +54,7 @@ fun ComicDetailScreen(viewModel: ComicDetailViewModel, popBackStack: () -> Unit)
 
         LazyColumn(Modifier.fillMaxSize(), lazyListState) {
             item { ComicDetailThumbnailHeader(comic, lazyListState) }
-            item { ComicDetailCharactersHeader(viewModel.color.value ?: 0xFFFFFF) }
+            item { ComicDetailCharactersHeader(color.value ?: 0xFFFFFF) }
             item { FirstCharacterItem(comic.value?.characters?.firstOrNull() ?: "", color.value ?: 0xFFFFFF) }
             items(comic.value?.characters?.takeLast(comic.value?.characters?.size?.minus(1) ?: 0) ?: listOf()) {
                 CharacterItem(it, color.value ?: 0xFFFFFF)

@@ -12,6 +12,7 @@ import de.fabianrump.composesuperhero.ui.comic_detail.ComicDetailViewModel
 import de.fabianrump.composesuperhero.ui.events.EventsScreen
 import de.fabianrump.composesuperhero.ui.hero_detail.HeroDetailScreen
 import de.fabianrump.composesuperhero.ui.hero_detail.HeroDetailViewModel
+import de.fabianrump.composesuperhero.ui.main.MainViewModel
 import de.fabianrump.composesuperhero.ui.overview.OverviewScreen
 import de.fabianrump.composesuperhero.ui.overview.OverviewViewModel
 import de.fabianrump.composesuperhero.ui.series.SeriesScreen
@@ -19,7 +20,7 @@ import de.fabianrump.navigation.Navigator
 import org.koin.androidx.compose.viewModel
 import timber.log.Timber
 
-fun NavGraphBuilder.addHeroesGraph(popBackStack: () -> Unit) {
+fun NavGraphBuilder.addHeroesGraph(sharedViewModel: MainViewModel, popBackStack: () -> Unit) {
     navigation(Navigator.NavTarget.Heroes.label, "heroesRoute") {
         composable(Navigator.NavTarget.Heroes.label) {
             val viewModel: OverviewViewModel by viewModel()
@@ -30,16 +31,16 @@ fun NavGraphBuilder.addHeroesGraph(popBackStack: () -> Unit) {
             val heroId = it.arguments?.getString("heroId") ?: "-1"
             Timber.d("Hero ID: $heroId")
             val viewModel: HeroDetailViewModel by viewModel()
-            viewModel.initialize(heroId, LocalContext.current)
-            HeroDetailScreen(viewModel, popBackStack)
+            viewModel.initialize(sharedViewModel.color, heroId, LocalContext.current)
+            HeroDetailScreen(sharedViewModel, viewModel, popBackStack)
         }
 
         composable("${Navigator.NavTarget.ComicDetail.label}/{comicId}", arguments = listOf(navArgument("comicId") { type = IntType })) {
             val comicId = it.arguments?.getInt("comicId") ?: -1
             Timber.d("Comic ID: $comicId")
             val viewModel: ComicDetailViewModel by viewModel()
-            viewModel.initialize(comicId, LocalContext.current)
-            ComicDetailScreen(viewModel, popBackStack)
+            viewModel.initialize(sharedViewModel.color, comicId, LocalContext.current)
+            ComicDetailScreen(sharedViewModel, viewModel, popBackStack)
         }
     }
 }
@@ -60,9 +61,9 @@ fun NavGraphBuilder.addEventsGraph() {
     }
 }
 
-fun NavGraphBuilder.addMainGraph(popBackStack: () -> Unit) {
+fun NavGraphBuilder.addMainGraph(sharedViewModel: MainViewModel, popBackStack: () -> Unit) {
     navigation("heroesRoute", "mainRoute") {
-        addHeroesGraph(popBackStack)
+        addHeroesGraph(sharedViewModel, popBackStack)
         addSeriesGraph()
         addEventsGraph()
     }

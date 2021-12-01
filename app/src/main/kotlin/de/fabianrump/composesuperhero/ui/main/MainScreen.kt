@@ -3,8 +3,12 @@ package de.fabianrump.composesuperhero.ui.main
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -13,8 +17,12 @@ import de.fabianrump.composesuperhero.ui.navigation.addMainGraph
 
 @Composable
 fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
+    val color = viewModel.color.observeAsState().value
+
     Scaffold(bottomBar = {
-        BottomNavigation {
+        BottomNavigation(
+            backgroundColor = color?.let { Color(it) } ?: Color(MaterialTheme.colors.primary.toArgb())
+        ) {
             BottomNavigationItem(selected = true, onClick = {
                 viewModel.navigateToHeroes(navController)
             }, icon = { Icon(painterResource(id = R.drawable.hero), "") })
@@ -29,7 +37,7 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
         }
     }) {
         NavHost(navController = navController, startDestination = "mainRoute") {
-            addMainGraph { navController.popBackStack() }
+            addMainGraph(viewModel) { navController.popBackStack() }
         }
     }
 }

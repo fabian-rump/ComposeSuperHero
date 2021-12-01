@@ -21,9 +21,8 @@ class HeroDetailViewModel(
 ) : ViewModel() {
 
     val superHero = MediatorLiveData<SuperHeroWithComics>()
-    val thumbnailColor = MediatorLiveData<Int>()
 
-    fun initialize(id: String, context: Context) {
+    fun initialize(thumbnailColor: MediatorLiveData<Int>, id: String, context: Context) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val fetchedSuperHero = superHeroInteractor.loadSuperHeroById(id)
