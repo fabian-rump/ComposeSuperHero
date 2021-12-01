@@ -1,5 +1,7 @@
 package de.fabianrump.composesuperhero.ui.main
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -7,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
@@ -35,9 +38,11 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
                 viewModel.navigateToEvents(navController)
             }, icon = { Icon(painterResource(id = R.drawable.events), "") })
         }
-    }) {
-        NavHost(navController = navController, startDestination = "mainRoute") {
-            addMainGraph(viewModel) { navController.popBackStack() }
+    }) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            NavHost(navController = navController, startDestination = "mainRoute") {
+                addMainGraph(viewModel) { navController.popBackStack() }
+            }
         }
     }
 }
