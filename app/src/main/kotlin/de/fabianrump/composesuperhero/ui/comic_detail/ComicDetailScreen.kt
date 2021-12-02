@@ -39,25 +39,26 @@ import coil.compose.rememberImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import de.fabianrump.composesuperhero.R
 import de.fabianrump.composesuperhero.ui.main.MainViewModel
+import de.fabianrump.composesuperhero.ui.util.getDefaultSystemColor
 import de.fabianrump.database.model.SuperHeroComic
 
 @Composable
 fun ComicDetailScreen(sharedViewModel: MainViewModel, viewModel: ComicDetailViewModel, popBackStack: () -> Unit) {
     val comic = viewModel.comic.observeAsState()
-    val color = sharedViewModel.color.observeAsState()
+    val color = sharedViewModel.color.observeAsState().value ?: getDefaultSystemColor()
 
-    rememberSystemUiController().setSystemBarsColor(Color(color.value ?: 0xFFFFFF))
+    rememberSystemUiController().setSystemBarsColor(Color(color))
     Scaffold(
-        topBar = { ComicDetailTopBar(name = viewModel.comic.value?.name ?: "", color.value ?: 0xFFFFFF, popBackStack) }
+        topBar = { ComicDetailTopBar(name = viewModel.comic.value?.name ?: "", color, popBackStack) }
     ) {
         val lazyListState = rememberLazyListState()
 
         LazyColumn(Modifier.fillMaxSize(), lazyListState) {
             item { ComicDetailThumbnailHeader(comic, lazyListState) }
-            item { ComicDetailCharactersHeader(color.value ?: 0xFFFFFF) }
-            item { FirstCharacterItem(comic.value?.characters?.firstOrNull() ?: "", color.value ?: 0xFFFFFF) }
+            item { ComicDetailCharactersHeader(color) }
+            item { FirstCharacterItem(comic.value?.characters?.firstOrNull() ?: "", color) }
             items(comic.value?.characters?.takeLast(comic.value?.characters?.size?.minus(1) ?: 0) ?: listOf()) {
-                CharacterItem(it, color.value ?: 0xFFFFFF)
+                CharacterItem(it, color)
             }
         }
     }

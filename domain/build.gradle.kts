@@ -17,4 +17,5 @@ dependencies {
     implementation(Libs.palette)
     implementation(Libs.coil)
     implementation(Libs.ktx)
+    implementation(Libs.timber)
 }

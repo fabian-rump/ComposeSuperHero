@@ -31,7 +31,7 @@ fun NavGraphBuilder.addHeroesGraph(sharedViewModel: MainViewModel, popBackStack:
             val heroId = it.arguments?.getString("heroId") ?: "-1"
             Timber.d("Hero ID: $heroId")
             val viewModel: HeroDetailViewModel by viewModel()
-            viewModel.initialize(sharedViewModel.color, heroId, LocalContext.current)
+            viewModel.initialize(heroId, LocalContext.current)
             HeroDetailScreen(sharedViewModel, viewModel, popBackStack)
         }
 
@@ -39,7 +39,7 @@ fun NavGraphBuilder.addHeroesGraph(sharedViewModel: MainViewModel, popBackStack:
             val comicId = it.arguments?.getInt("comicId") ?: -1
             Timber.d("Comic ID: $comicId")
             val viewModel: ComicDetailViewModel by viewModel()
-            viewModel.initialize(sharedViewModel.color, comicId, LocalContext.current)
+            viewModel.initialize(comicId, LocalContext.current)
             ComicDetailScreen(sharedViewModel, viewModel, popBackStack)
         }
     }

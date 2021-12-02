@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val mainModule = module {
     viewModel { OverviewViewModel(get(), get()) }
-    viewModel { HeroDetailViewModel(get(), get(), get()) }
-    viewModel { ComicDetailViewModel(get(), get()) }
-    viewModel { MainViewModel(get()) }
+    viewModel { HeroDetailViewModel(get(), get(), get(), get()) }
+    viewModel { ComicDetailViewModel(get(), get(), get()) }
+    viewModel { MainViewModel(get(), get()) }
 }

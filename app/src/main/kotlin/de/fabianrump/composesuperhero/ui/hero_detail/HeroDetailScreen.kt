@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import de.fabianrump.composesuperhero.ui.main.MainViewModel
+import de.fabianrump.composesuperhero.ui.util.getDefaultSystemColor
 import de.fabianrump.database.model.SuperHeroWithComics
 
 @Composable
@@ -146,13 +147,13 @@ private fun DetailThumbnailHeader(
 @Composable
 private fun HeroDetailTopBar(sharedViewModel: MainViewModel, viewModel: HeroDetailViewModel, popBackStack: () -> Unit) {
     val hero = viewModel.superHero.observeAsState()
-    val color = sharedViewModel.color.observeAsState()
+    val color = sharedViewModel.color.observeAsState().value ?: getDefaultSystemColor()
 
-    rememberSystemUiController().setSystemBarsColor(Color(color.value ?: 0xFFFFFF))
+    rememberSystemUiController().setSystemBarsColor(Color(color))
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .background(color = Color(color.value ?: 0x0000FF))
+            .background(color = Color(color))
             .fillMaxWidth()
     ) {
         Icon(
